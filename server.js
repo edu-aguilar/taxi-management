@@ -5,10 +5,11 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var config = require('./backend/config.js');
 var common = require('./backend/common.js');
+var Ride = require('./backend/models/ride.js');
+var Journey = require('./backend/models/journey.js');
+var journeyApi = require('./backend/controllers/journey.controller.js');
 
 mongoose.connect(config.database); // connect to our database
-var Journey = require('./backend/models/journey.js');
-var Ride = require('./backend/models/ride.js');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -21,10 +22,19 @@ app.use(morgan('dev'));
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
+// test route to make sure everything is working (accessed at GET http://localhost:3000/api)
 router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });
 });
+
+// ----------------------------------------------------
+// -----------------------API--------------------------
+// ----------------------------------------------------
+router.route('/journey')
+    .post(journeyApi.newJourney);
+
+// middleware to use for all requests
+router.use(common.middleware);
 
 
 // REGISTER OUR ROUTES

@@ -11,4 +11,4 @@ var JourneySchema   = new Schema({
     rides: [RideSchema]
 });
 
-module.exports = mongoose.model('Journey', UserSchema);
+module.exports = mongoose.model('Journey', JourneySchema);
