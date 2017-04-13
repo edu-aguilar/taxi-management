@@ -3,6 +3,12 @@ var app = express();
 var bodyParser = require('body-parser'); //to POST operations.
 var mongoose = require('mongoose');
 var morgan = require('morgan');
+var config = require('./backend/config.js');
+var common = require('./backend/common.js');
+
+mongoose.connect(config.database); // connect to our database
+var Journey = require('./backend/models/journey.js');
+var Ride = require('./backend/models/ride.js');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
