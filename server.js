@@ -30,8 +30,14 @@ router.get('/', function(req, res) {
 // ----------------------------------------------------
 // -----------------------API--------------------------
 // ----------------------------------------------------
+
 router.route('/journey')
-    .post(journeyApi.newJourney);
+    .post(journeyApi.newJourney)
+    .get(journeyApi.getAllJourneys);
+
+router.route('/journey/:journeyId')
+    .get(journeyApi.getJourneyById);
+
 
 // middleware to use for all requests
 router.use(common.middleware);
