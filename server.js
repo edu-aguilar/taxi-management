@@ -43,6 +43,9 @@ router.route('/journey/:journeyId/ride')
     .post(riderApi.newRide)
     .get(riderApi.getAllRides);
 
+router.route('/journey/:journeyId/ride/:rideId')
+    .get(riderApi.getRideById);
+
 // middleware to use for all requests
 router.use(common.middleware);
 

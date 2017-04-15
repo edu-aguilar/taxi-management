@@ -3,6 +3,7 @@ var Ride = require('../models/ride.js');
 
 exports.newRide = newRide;
 exports.getAllRides = getAllRides;
+exports.getRideById = getRideById;
 
 function newRide(req, res) {
 
@@ -40,4 +41,19 @@ function getAllRides(req, res) {
         res.json(journey.rides);
     });
 
+}
+
+function getRideById(req, res) {
+
+  Journey.findOne({id: req.params.journeyId}, function(err, journey) {
+        if (err){
+          res.send(err);
+        }
+        var l = journey.rides.length;
+        for (var i = 0; i < l; i++) {
+          if (journey.rides[i].id === req.params.rideId) {
+            res.json(journey.rides[i]);
+          }
+        }
+    });
 }
