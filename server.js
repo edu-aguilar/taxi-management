@@ -8,6 +8,7 @@ var common = require('./backend/common.js');
 var Ride = require('./backend/models/ride.js');
 var Journey = require('./backend/models/journey.js');
 var journeyApi = require('./backend/controllers/journey.controller.js');
+var riderApi = require('./backend/controllers/ride.controller.js');
 
 mongoose.connect(config.database); // connect to our database
 
@@ -38,6 +39,9 @@ router.route('/journey')
 router.route('/journey/:journeyId')
     .get(journeyApi.getJourneyById);
 
+router.route('/journey/:journeyId/ride')
+    .post(riderApi.newRide)
+    .get(riderApi.getAllRides);
 
 // middleware to use for all requests
 router.use(common.middleware);
